@@ -168,4 +168,29 @@ python manage.py runserver
     "region": "Americas",
     "population": 126000000
   }
+### 7. Search for a country by its name (supports partial search)
+
+- **URL**: `/api/countries/search/`
+- **Method**: `GET`
+- **Description**: Search for countries by name (supports partial search).
+- **Example URL**:  `/api/countries/search/?q=united`
+- **Response Example**:
+  ```json
+  {
+    "id": 1,
+    "name_common": "United States",
+    "capital": "Washington, D.C.",
+    "region": "Americas",
+    "languages": "English, Spanish",
+    "population": 331000000
+  },
+  {
+    "id": 2,
+    "name_common": "United Kingdom",
+    "capital": "London",
+    "region": "Europe",
+    "languages": "English",
+    "population": 67000000
+  }
+
 

@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import NotFound
 from .models import Country
 from .serializers import CountrySerializer
 
@@ -37,3 +38,15 @@ class SameRegionCountriesAPIView(generics.ListAPIView):
 
         # Filter countries by the same region
         return Country.objects.filter(region=country.region)
+    
+class CountrySearchAPIView(generics.ListAPIView):
+    serializer_class = CountrySerializer
+
+    def get_queryset(self):
+        query = self.request.query_params.get('q', None)  # Get 'q' parameter for search query
+        
+        if query is None:
+            raise NotFound(detail="Search query 'q' is required.")
+        
+        # Filter countries by name_common, case-insensitive and partial match
+        return Country.objects.filter(name_common__icontains=query)
