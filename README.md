@@ -1,5 +1,5 @@
 # Country Info Application
-
+This Django project provides country-related information through RESTful APIs. It allows users to view all countries and fetch details of a specific country by its `id`.
 ---
 ## Features
 
@@ -22,7 +22,48 @@ source venv/bin/activate        # On Windows: venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
-### 4. Migrate the Database
+### 4. Apply migrations to set up the database:
 ```bash
 python manage.py migrate
 ```
+### 5. Run the development server:
+```bash
+python manage.py runserver
+```
+
+## Endpoints
+### 1. List All Countries
+- **URL**: `/api/countries/`
+- **Method**: `GET`
+- **Description**: Fetch a list of all countries.
+- **Response Example**:
+  ```json
+  [
+    {
+      "id": 1,
+      "name_common": "United States",
+      "capital": "Washington, D.C.",
+      "region": "Americas",
+      "population": 331000000
+    },
+    ...
+  ]
+### 2. Retrieve Specific Country by ID
+
+- **URL**: `/api/countries/<int:id>/`
+- **Method**: `GET`
+- **Description**: Fetch details of a specific country by its ID.
+- **URL Params**:
+  - `id`: The unique identifier of the country.
+
+- **Example URL**: `/api/countries/1/`
+
+- **Response Example**:
+  ```json
+  {
+    "id": 1,
+    "name_common": "United States",
+    "capital": "Washington, D.C.",
+    "region": "Americas",
+    "population": 331000000
+  }
