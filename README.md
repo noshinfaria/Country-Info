@@ -67,3 +67,30 @@ python manage.py runserver
     "region": "Americas",
     "population": 331000000
   }
+### 3. Create a New Country Entry
+
+- **URL**: `/api/countries/`
+- **Method**: `POST`
+- **Description**: Create a new country entry in the database.
+- **Request Body** (JSON):
+  ```json
+  {
+    "name_common": "Japan",
+    "name_official": "Japan",
+    "capital": "Tokyo",
+    "region": "Asia",
+    "population": 126300000   
+  }
+- **Response Example**:
+  ```json
+    {
+        "id": 251,
+        "name_common": "Japan",
+        "name_official": "Japan",
+        "capital": "Tokyo",
+        "region": "Asia",
+        "subregion": null,
+        "population": 126300000,
+        "area": null,
+        "flag_url": null
+    }

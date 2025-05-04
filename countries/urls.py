@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import CountryListView, CountryDetailView
+from .views import CountryListCreateAPIView, CountryDetailView
 
 urlpatterns = [
-    path('api/countries/', CountryListView.as_view(), name='country-list'),
+    path('api/countries/', CountryListCreateAPIView.as_view(), name='country-list-create'),
     path('api/countries/<int:id>/', CountryDetailView.as_view(), name='country-detail'),
 ]
