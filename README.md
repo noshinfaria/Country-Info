@@ -18,4 +18,7 @@ source venv/bin/activate        # On Windows: venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
-
+### 4. Migrate the Database
+```bash
+python manage.py migrate
+```
