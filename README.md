@@ -1,6 +1,10 @@
 # Country Info Application
 
 ---
+## Features
+
+- ✅ Fetches all country data from the Countries API
+- ✅ Stores data in a relational database
 
 ## Setup Instructions
 
