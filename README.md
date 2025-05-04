@@ -130,3 +130,16 @@ python manage.py runserver
         "area": null,
         "flag_url": null
     }
+### 5. Delete an Existing Country
+
+- **URL**: `/api/countries/<int:id>/delete/`
+- **Method**: `DELETE`
+- **Description**: Delete an existing country by its ID.
+- **URL Params**:
+    - `id`: The unique identifier of the country.
+- **Example URL**:  `/api/countries/1/delete/` (Deletes the country with ID = 1)
+- **Response Example**:
+  ```json
+    {
+    "detail": "Country deleted successfully."
+    }
