@@ -6,7 +6,7 @@ class CountryListCreateAPIView(generics.ListCreateAPIView):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
 
-class CountryDetailView(generics.RetrieveAPIView):
+class CountryRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
     lookup_field = 'id'

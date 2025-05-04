@@ -1,5 +1,7 @@
 # Country Info Application
+
 This Django project provides country-related information through RESTful APIs. It allows users to view all countries and fetch details of a specific country by its `id`.
+
 ---
 ## Features
 
@@ -88,6 +90,40 @@ python manage.py runserver
         "name_common": "Japan",
         "name_official": "Japan",
         "capital": "Tokyo",
+        "region": "Asia",
+        "subregion": null,
+        "population": 126300000,
+        "area": null,
+        "flag_url": null
+    }
+### 4. Update an Existing Country
+
+- **URL**: `/api/countries/<int:id>/`
+- **Method**: `PUT or PATCH`
+- **Description**: Update the details of an existing country entry by its ID.
+- **Full Update Request Body (PUT)**:
+  ```json
+    {
+    "name_common": "Japan",
+    "name_official": "State of Japan",
+    "capital": "Tokyo",
+    "region": "Asia",
+    "population": 126300000
+    }
+- **Partial Update Request Body (PATCH)**:
+  ```json
+    {
+    "capital": "New Tokyo"
+    }
+
+
+- **Response Example**:
+  ```json
+    {
+        "id": 251,
+        "name_common": "Japan",
+        "name_official": "State of Japan",
+        "capital": "New Tokyo",
         "region": "Asia",
         "subregion": null,
         "population": 126300000,
