@@ -25,3 +25,15 @@ class CountryDeleteAPIView(generics.DestroyAPIView):
 
         # After the object is deleted, add a custom message
         return Response({"detail": "Country deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+
+
+class SameRegionCountriesAPIView(generics.ListAPIView):
+    serializer_class = CountrySerializer
+
+    def get_queryset(self):
+        # Get the country id from the URL
+        country_id = self.kwargs.get("id")
+        country = Country.objects.get(id=country_id)
+
+        # Filter countries by the same region
+        return Country.objects.filter(region=country.region)

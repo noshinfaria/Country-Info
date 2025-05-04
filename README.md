@@ -143,3 +143,29 @@ python manage.py runserver
     {
     "detail": "Country deleted successfully."
     }
+### 6. List same regional countries of a specific country.
+
+- **URL**: `/api/countries/<int:id>/same-region/`
+- **Method**: `GET`
+- **Description**: Fetch all countries that are in the same region as the country with the specified ID.
+- **URL Params**:
+    - `id`: The unique identifier of the country.
+- **Example URL**:  `/api/countries/2/same-region/`
+- **Response Example**:
+  ```json
+    
+  {
+    "id": 2,
+    "name_common": "Canada",
+    "capital": "Ottawa",
+    "region": "Americas",
+    "population": 37000000
+  },
+  {
+    "id": 3,
+    "name_common": "Mexico",
+    "capital": "Mexico City",
+    "region": "Americas",
+    "population": 126000000
+  }
+
