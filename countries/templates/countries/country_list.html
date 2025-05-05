@@ -24,14 +24,15 @@
             </tr>
         </thead>
         <tbody>
+            
             {% for country in countries %}
             <tr>
-                <td>{{ country.name_common }}</td>
+                <td>{{ country.name_official }}</td>
                 <td>{{ country.cca2 }}</td>
-                <td>{{ country.capital }}</td>
+                <td>{{ country.capital|join:", "  }}</td>
                 <td>{{ country.population }}</td>
-                <td>{{ country.timezones }}</td>
-                <td><img src="{{ country.flag_url }}" alt="Flag" width="30"></td>
+                <td>{{ country.timezones|join:", "  }}</td>
+                <td><img src="{{ country.flag_png }}" alt="Flag" width="50" height="30"></td>
                 <td><a href="{% url 'country_detail_view' country.id %}" class="btn btn-info btn-sm">Details</a></td>
             </tr>
             {% empty %}
@@ -39,5 +40,6 @@
             {% endfor %}
         </tbody>
     </table>
+
 </body>
 </html>

@@ -4,28 +4,67 @@
     <title>{{ country.name_common }} - Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="container mt-4">
-    <h2>{{ country.name_common }} - Country Details</h2>
+<body class="container my-5">
+    <h2 class="mb-4">{{ country.name_official }} <small class="text-muted">({{ country.flag_emoji }})</small></h2>
 
-    <div class="mb-3">
-        <p><strong>Official Name:</strong> {{ country.name_official }}</p>
-        <p><strong>Capital:</strong> {{ country.capital }}</p>
-        <p><strong>Region:</strong> {{ country.region }}</p>
-        <p><strong>Population:</strong> {{ country.population }}</p>
-        <p><strong>Timezones:</strong> {{ country.timezones }}</p>
-        <p><strong>Languages:</strong> {{ country.languages }}</p>
-        <p><strong>Flag:</strong> <br><img src="{{ country.flag_url }}" alt="Flag" width="100"></p>
+    <div class="card mb-5 shadow-sm">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Languages:</strong> {{ country.languages|join:", " }}</p>
+                    <p><strong>CCA2:</strong> {{ country.cca2 }}</p>
+                    <p><strong>CCA3:</strong> {{ country.cca3 }}</p>
+                    <p><strong>CCN3:</strong> {{ country.ccn3 }}</p>
+                    <p><strong>CIOC:</strong> {{ country.cioc }}</p>
+                    <p><strong>Independent:</strong> {{ country.independent }}</p>
+                    <p><strong>UN Member:</strong> {{ country.un_member }}</p>
+                    <p><strong>Region:</strong> {{ country.region }}</p>
+                    <p><strong>Subregion:</strong> {{ country.subregion }}</p>
+                    <p><strong>Capital:</strong> {{ country.capital|join:", " }}</p>
+                    <p><strong>Area:</strong> {{ country.area }}</p>
+                    <p><strong>Population:</strong> {{ country.population }}</p>
+                    <p><strong>Landlocked:</strong> {{ country.landlocked }}</p>
+                    <p><strong>Borders:</strong> {{ country.borders|join:", " }}</p>
+                    <p><strong>Timezones:</strong> {{ country.timezones|join:", " }}</p>
+                    <p><strong>Continents:</strong> {{ country.continents|join:", " }}</p>
+                </div>
+                <div class="col-md-6">
+                    
+                    <p><strong>Flag:</strong><br><img src="{{ country.flag_png }}" alt="Flag" class="img-thumbnail" width="120"></p>
+                    {% if country.coat_of_arms_png %}
+                        <p><strong>Coat of Arms:</strong><br><img src="{{ country.coat_of_arms_png }}" alt="Coat of Arms" class="img-thumbnail" width="120"></p>
+                    {% endif %}
+                    <p><strong>Start of Week:</strong> {{ country.start_of_week }}</p>
+                    <p><strong>Driving Side:</strong> {{ country.driving_side }}</p>
+                    <p><strong>Capital Lat/Lng:</strong> {{ country.capital_latlng|join:", " }}</p>
+                    <p><strong>Lat/Lng:</strong> {{ country.latlng|join:", " }}</p>
+                    <p><strong>Google Maps:</strong> <a href="{{ country.google_maps }}" target="_blank">{{ country.google_maps }}</a></p>
+                    <p><strong>OpenStreetMap:</strong> <a href="{{ country.open_street_maps }}" target="_blank">{{ country.open_street_maps }}</a></p>
+                    <p><strong>TLDs:</strong> {{ country.tlds|join:", " }}</p>
+                    <p><strong>Alt Spellings:</strong> {{ country.alt_spellings|join:", " }}</p>
+                    {% comment %} <p><strong>Translations:</strong> <pre class="bg-light p-2 rounded">{{ country.translations|safe }}</pre></p>
+                    <p><strong>Demonyms:</strong> <pre class="bg-light p-2 rounded">{{ country.demonyms|safe }}</pre></p>
+                    <p><strong>Native Names:</strong> <pre class="bg-light p-2 rounded">{{ country.native_name|safe }}</pre></p>
+                    <p><strong>GINI:</strong> <pre class="bg-light p-2 rounded">{{ country.gini|safe }}</pre></p>
+                    <p><strong>Postal Code:</strong> <pre class="bg-light p-2 rounded">{{ country.postal_code|safe }}</pre></p>
+                    <p><strong>IDD:</strong> <pre class="bg-light p-2 rounded">{{ country.idd|safe }}</pre></p> {% endcomment %}
+                </div>
+            </div>
+        </div>
     </div>
 
     <h4>Other countries in the same region:</h4>
-    <ul>
+    <ul class="list-group mb-4">
         {% for item in same_region %}
-            <li>{{ item.name_common }}</li>
+            <li class="list-group-item">
+                <a href="{% url 'country_detail_view' item.id %}" class="text-decoration-none">{{ item.name_official }}</a>
+            </li>
         {% empty %}
-            <li>No other countries in the same region.</li>
+            <li class="list-group-item text-muted">No other countries in the same region.</li>
         {% endfor %}
     </ul>
 
-    <a href="{% url 'country_list_view' %}" class="btn btn-secondary mt-3">Back</a>
+    <a href="{% url 'country_list_view' %}" class="btn btn-secondary">← Back to Country List</a>
+
 </body>
 </html>

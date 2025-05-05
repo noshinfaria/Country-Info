@@ -3,6 +3,6 @@ from .models import Country
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
-    list_display = ("name_common", "capital", "region", "population")
-    search_fields = ("name_common", "capital", "region")
+    list_display = ("name_official", "capital", "region", "population")
+    search_fields = ("name_official", "capital", "region")
 
