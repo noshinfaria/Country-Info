@@ -39,7 +39,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-## Endpoints
+## API Endpoints
 ### 1. List All Countries
 - **URL**: `/api/countries/`
 - **Method**: `GET`
@@ -215,4 +215,14 @@ python manage.py runserver
     "population": 67000000
   }
 
+## Web Interface
+### 1. List All Countries
+- **URL**: `/countries/`
+- **Method**: `GET`
+- **Description**: Fetch a list of all countries with a detail button. A search button for partially search the country name.
+### 2. Detail Page of A Country
+
+- **URL**: `/countries/<int:id>/`
+- **Method**: `GET`
+- **Description**: Fetch details of a specific country by its ID. Fetch countries list having similar region and language.
 
