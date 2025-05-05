@@ -15,7 +15,7 @@ class Country(models.Model):
     name_official = models.CharField(max_length=150)
     cca2 = models.CharField(max_length=2, unique=True)
     cca3 = models.CharField(max_length=3, unique=True)
-    ccn3 = models.CharField(max_length=3, unique=True)
+    ccn3 = models.CharField(max_length=3, unique=True, null=True, blank=True)
     cioc = models.CharField(max_length=3, null=True, blank=True)
     independent = models.BooleanField(default=True)
     un_member = models.BooleanField(default=True)
