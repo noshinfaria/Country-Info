@@ -220,9 +220,15 @@ python manage.py runserver
 - **URL**: `/countries/`
 - **Method**: `GET`
 - **Description**: Fetch a list of all countries with a detail button. A search button for partially search the country name.
+
+![List All Countries Screenshot](static/images/list_page.png)
+
+---
+
 ### 2. Detail Page of A Country
 
 - **URL**: `/countries/<int:id>/`
 - **Method**: `GET`
 - **Description**: Fetch details of a specific country by its ID. Fetch countries list having similar region and language.
 
+![Country Detail Page Screenshot](static/images/detail_page.png)
