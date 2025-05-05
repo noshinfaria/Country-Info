@@ -133,3 +133,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 30,
 }
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'country_list_view'
+LOGOUT_REDIRECT_URL = 'login'
