@@ -46,6 +46,34 @@ class SameRegionCountriesAPIView(LoginRequiredMixin, generics.ListAPIView):
         # Filter countries by the same region
         return Country.objects.filter(region=country.region)
     
+class CountriesByLanguageView(LoginRequiredMixin, generics.ListAPIView):
+    serializer_class = CountrySerializer
+
+    def get_queryset(self):
+        language = self.request.query_params.get('q')
+        if not language:
+            return Country.objects.none()
+        return Country.objects.filter(languages__icontains=language)
+
+    def list(self, request, *args, **kwargs):
+        language = request.query_params.get('q')
+        if not language:
+            return Response(
+                {"error": "Language query parameter 'q' is required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            return Response(
+                {"error": f"No countries found for language '{language}'."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    
 class CountrySearchAPIView(LoginRequiredMixin, generics.ListAPIView):
     serializer_class = CountrySerializer
 
@@ -108,12 +136,23 @@ def country_detail_view(request, id):
         country = country_response.json()
         data = same_region_response.json()
         same_region = data.get("results", [])
+
+        # Extract first language or fallback
+        language = country.get("languages", [])[0].strip().lower() if country.get("languages") else ""
+        # print(language)
+        same_language_response = session.get(f"{API_BASE}language/?q={language}")
+        data2 = same_language_response.json() if same_language_response.status_code == 200 else []
+        same_language = data2 if isinstance(data2, list) else []
+        # print(same_language)
+
     except Exception as e:
         print("Error fetching country detail:", e)
         country = {}
         same_region = []
+        same_language = []
 
     return render(request, 'countries/country_detail.html', {
         'country': country,
-        'same_region': same_region
+        'same_region': same_region,
+        'same_language': same_language
     })

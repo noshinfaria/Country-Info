@@ -1,12 +1,14 @@
-# Country Info Application
+# Country Info Django Application
 
-This Django project provides country-related information through RESTful APIs. It allows users to view all countries and fetch details of a specific country by its `id`.
+A Django web application that displays detailed country information retrieved via authenticated API endpoints. Only logged-in users can access the data.
 
 ---
 ## Features
 
-- ✅ Fetches all country data from the Countries API
-- ✅ Stores data in a relational database
+- User authentication (login/logout)
+- Country list and detail views
+- Secure session-based API access
+- Search by country name
 
 ## Setup Instructions
 
@@ -28,7 +30,11 @@ pip install -r requirements.txt
 ```bash
 python manage.py migrate
 ```
-### 5. Run the development server:
+### 5. Create a superuser (optional, for admin access)
+```bash
+python manage.py createsuperuser
+```
+### 6. Run the development server:
 ```bash
 python manage.py runserver
 ```
@@ -101,15 +107,6 @@ python manage.py runserver
 - **URL**: `/api/countries/<int:id>/`
 - **Method**: `PUT or PATCH`
 - **Description**: Update the details of an existing country entry by its ID.
-- **Full Update Request Body (PUT)**:
-  ```json
-    {
-    "name_common": "Japan",
-    "name_official": "State of Japan",
-    "capital": "Tokyo",
-    "region": "Asia",
-    "population": 126300000
-    }
 - **Partial Update Request Body (PATCH)**:
   ```json
     {
@@ -168,7 +165,32 @@ python manage.py runserver
     "region": "Americas",
     "population": 126000000
   }
-### 7. Search for a country by its name (supports partial search)
+### 7. List countries that speak the same language based on a given language.
+
+- **URL**: `/api/countries/language/`
+- **Method**: `GET`
+- **Description**: Fetch all countries that speak the same language based on a given language.
+- **Example URL**:  `/api/countries/language/?q=united`
+- **Response Example**:
+  ```json
+    
+  {
+    "id": 1,
+    "name_common": "United States",
+    "capital": "Washington, D.C.",
+    "region": "Americas",
+    "languages": "English",
+    "population": 331000000
+  },
+  {
+    "id": 2,
+    "name_common": "United Kingdom",
+    "capital": "London",
+    "region": "Europe",
+    "languages": "English",
+    "population": 67000000
+  }
+### 8. Search for a country by its name (supports partial search)
 
 - **URL**: `/api/countries/search/`
 - **Method**: `GET`
@@ -178,7 +200,7 @@ python manage.py runserver
   ```json
   {
     "id": 1,
-    "name_common": "United States",
+    "name_official": "United States",
     "capital": "Washington, D.C.",
     "region": "Americas",
     "languages": "English, Spanish",
@@ -186,7 +208,7 @@ python manage.py runserver
   },
   {
     "id": 2,
-    "name_common": "United Kingdom",
+    "name_official": "United Kingdom",
     "capital": "London",
     "region": "Europe",
     "languages": "English",
